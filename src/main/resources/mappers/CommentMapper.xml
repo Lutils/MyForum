@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljc.dao.CommentDao">
+	
+	<resultMap type="Comment" id="CommentResult">
+		<id property="cid" column="cid"/>
+		<result property="content" column="content"/>
+		<result property="aid" column="aid"/>
+		<result property="uid" column="uid"/>
+		<result property="cuser" column="cuser"/>
+		<result property="date" column="date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+	</resultMap>
+	
+	<insert id="addComment">
+		insert into comment(content,aid,uid,cuser,date) values(#{content},#{aid},#{uid},#{cuser},#{date})
+	</insert>
+	
+	<select id="findComment" resultMap="CommentResult">
+		select * from comment where 1=1
+		<if test="aid!=null">
+			and aid=#{aid}
+		</if>
+		<if test="uid!=null">
+			and uid=#{uid}
+		</if>
+	</select>
+	
+	<select id="getCommentCount" resultType="java.lang.Integer">
+		select count(*) from comment where aid=#{aid}
+	</select>
+	
+</mapper>

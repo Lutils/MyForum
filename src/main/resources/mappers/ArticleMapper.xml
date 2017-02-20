@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljc.dao.ArticleDao">
+	
+	<resultMap type="Article" id="ArticleResult">
+		<id property="aid" column="aid"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="date" column="date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+		<result property="uid" column="uid"/>
+		<result property="author" column="author"/>
+		<result property="lable" column="lable"/>
+	</resultMap>
+	
+	<select id="getArticleList" resultMap="ArticleResult">
+		select * from article order by aid desc
+	</select>
+	
+	<select id="getArticlePageList" resultMap="ArticleResult">
+		select * from article order by aid desc limit #{currentPage},#{pageSize}
+	</select>
+	
+	<select id="getArticleByID" resultType="Article">
+		select * from article where aid=#{aid}
+	</select>
+	
+	<insert id="addArticle">
+		insert into article(title,content,date,uid,author,lable) values(#{title},#{content},#{date},#{uid},#{author},#{lable})
+	</insert>
+	
+	<select id="getArticleByUID" resultType="Article">
+		select * from article where uid=#{uid} order by aid desc
+	</select>
+	
+	<delete id="deleteArticleByID">
+		delete from article where aid=#{aid}
+	</delete>
+	
+	<select id="searchArticleByKey" resultMap="ArticleResult">
+		select * from article where title like concat(concat('%',#{key}),'%') order by aid desc
+	</select>
+	
+</mapper>
