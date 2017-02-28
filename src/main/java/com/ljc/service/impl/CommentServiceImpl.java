@@ -17,9 +17,8 @@ public class CommentServiceImpl implements CommentService {
 	private CommentDao commentDao;
 	
 	@Override
-	public int addComment(String content, Integer aid, Integer uid,
-			String username,Timestamp timestamp) {
-		return commentDao.addComment(content, aid, uid, username, timestamp);
+	public int addComment(String content, Integer aid, Integer uid,Timestamp timestamp) {
+		return commentDao.addComment(content, aid, uid, timestamp);
 	}
 
 	@Override

@@ -48,7 +48,7 @@
 								  <tr>
 								  	<td>
 									  	<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
-									  	<a href="${pageContext.request.contextPath}/article/list/${ua.aid }" target="_blank">${ua.title }</a>
+									  	<a href="${pageContext.request.contextPath}/article/details/${ua.aid }" target="_blank">${ua.title }</a>
 									  	<div style="float: right;">
 										  	<fmt:formatDate value="${ua.date }" pattern="yyyy/MM/dd HH:mm:ss" />
 										  	<button type="button" class="btn btn-danger" onclick="deleteArticle(${ua.aid })">删除</button>

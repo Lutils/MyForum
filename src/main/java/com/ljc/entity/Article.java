@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author LJC 帖子列表实体
+ * @author LJC 
+ * 帖子列表实体
  */
 
 public class Article implements Serializable {

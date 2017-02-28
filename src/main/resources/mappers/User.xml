@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljc.dao.UserDao">
+	
+	<resultMap type="User" id="UserResult">
+		<id property="uid" column="uid"/>
+		<result property="username" column="username"/>
+		<result property="password" column="password"/>
+		<result property="headimg" column="headimg"/>
+	</resultMap>
+	
+	<insert id="addUser">
+		insert into user(username,password,headimg) values(#{username},#{password},#{headimg})
+	</insert>
+	
+	<select id="findUser" resultMap="UserResult">
+		select * from user where username=#{username}
+		<if test="password!=null">
+			and password=#{password}
+		</if>
+	</select>
+
+	<select id="getUserByID" resultMap="UserResult">
+		select * from user where uid=#{uid}
+	</select>
+	
+	<update id="updateHeadImg">
+		update user set headimg=#{headimg} where uid=#{uid}
+	</update>
+	
+	<update id="updateUserInfo">
+		update user set password=#{password} where uid=#{uid}
+	</update>
+	
+</mapper>

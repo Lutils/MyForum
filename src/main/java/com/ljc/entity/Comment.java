@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author LJC 评论内容实体
+ * @author LJC 
+ * 评论内容实体
  */
 public class Comment implements Serializable {
 

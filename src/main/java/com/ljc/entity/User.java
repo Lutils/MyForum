@@ -3,7 +3,8 @@ package com.ljc.entity;
 import java.io.Serializable;
 
 /**
- * @author LJC 用户实体
+ * @author LJC 
+ * 用户实体
  */
 public class User implements Serializable {
 

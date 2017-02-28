@@ -113,6 +113,7 @@ function doClick() {
 		'contentType' : "application/x-www-form-urlencoded; charset=utf-8",
 		'type' : 'POST',
 		'success' : function(data) {
+			alert(data.data);
 			location.href = "${pageContext.request.contextPath}/article/list/1";
 		},
 		'error' : function() {

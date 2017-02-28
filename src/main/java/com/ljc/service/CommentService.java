@@ -13,11 +13,10 @@ public interface CommentService {
 	 * @param content
 	 * @param aid
 	 * @param uid
-	 * @param username 评论用户昵称
 	 * @param timestamp
 	 * @return
 	 */
-	public int addComment(String content, Integer aid, Integer uid, String username,Timestamp timestamp);
+	public int addComment(String content, Integer aid, Integer uid ,Timestamp timestamp);
 	
 	/**
 	 * 通过id获得评论数据

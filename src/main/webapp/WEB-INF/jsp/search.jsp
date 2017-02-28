@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=0.3">
-<title>TA的信息</title>
+<title>搜索结果</title>
 <%@include file="common/import.jsp"%>
 </head>
 <body>

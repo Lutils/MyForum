@@ -29,8 +29,8 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public int addArticle(String title, String content, Timestamp timestamp,
-			Integer uid,String author, String lable) {
-		return articleDao.addArticle(title, content, timestamp, uid,author, lable);
+			Integer uid, String lable) {
+		return articleDao.addArticle(title, content, timestamp, uid, lable);
 	}
 
 	@Override

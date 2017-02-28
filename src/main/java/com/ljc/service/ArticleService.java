@@ -27,11 +27,10 @@ public interface ArticleService {
 	 * @param content
 	 * @param timestamp
 	 * @param uid
-	 * @param author
 	 * @param lable 
 	 * @return
 	 */
-	public int addArticle(String title, String content,Timestamp timestamp,Integer uid,String author, String lable);
+	public int addArticle(String title, String content,Timestamp timestamp,Integer uid, String lable);
 
 	/**
 	 * 根据uid获得用户的帖子数据

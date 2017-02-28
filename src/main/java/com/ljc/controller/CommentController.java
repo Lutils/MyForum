@@ -44,10 +44,8 @@ public class CommentController {
 			@RequestParam(value = "aid") Integer aid,
 			@RequestParam(value = "uid") Integer uid){
 		Map<String, String> map = new HashMap<>();
-		// 获得回帖人用户名
-		String username = userService.getUserByID(uid).getUsername();
 		//插入评论
-		int result = commentService.addComment(content,aid,uid,username,new Timestamp(new Date().getTime()));
+		int result = commentService.addComment(content,aid,uid,new Timestamp(new Date().getTime()));
 		if(result>0){
 			LogUtils.info("回复成功！内容为:"+content);
 			map.put("data", "回复成功！");

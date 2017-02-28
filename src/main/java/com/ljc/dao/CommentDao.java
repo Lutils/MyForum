@@ -12,7 +12,6 @@ public interface CommentDao {
 	public int addComment(@Param("content")String content, 
 			@Param("aid")Integer aid, 
 			@Param("uid")Integer uid, 
-			@Param("cuser")String username,
 			@Param("date")Timestamp timestamp);
 
 	public List<Comment> findComment(@Param("aid")Integer aid, @Param("uid")Integer uid);

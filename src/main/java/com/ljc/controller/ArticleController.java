@@ -25,6 +25,7 @@ import com.ljc.service.ArticleService;
 import com.ljc.service.CommentService;
 import com.ljc.service.UserService;
 import com.ljc.utils.LogUtils;
+import com.ljc.utils.StringUtils;
 
 /**
  * @author LJC 
@@ -75,11 +76,6 @@ public class ArticleController {
 		Article article = articleService.getArticleByID(aid);
 		//评论数据
 		List<Comment> commentList = commentService.findComment(aid, null);
-		//获得评论者头像数据
-		for (int i = 0; i < commentList.size(); i++) {
-			User replayer = userService.getUserByID(commentList.get(i).getUid());
-			commentList.get(i).setUimg(replayer.getHeadimg());
-		}
 		//数据存放至Model
 		mav.addObject(article);
 		mav.addObject(commentList);
@@ -123,13 +119,13 @@ public class ArticleController {
 	 * @param content
 	 * @return
 	 */
-	@RequestMapping("/add")
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> addArticle(HttpSession session,
-			@RequestParam(value = "title", required = false) String title,
-			@RequestParam(value = "content", required = false) String content,
+			@RequestParam(value = "title") String title,
+			@RequestParam(value = "content") String content,
 			@RequestParam(value = "uid") Integer uid,
-			@RequestParam(value = "lable", required = false) String lable){
+			@RequestParam(value = "lable") String lable){
 		Map<String, String> map = new HashMap<>();
 		//身份检测
 		User user = (User) session.getAttribute("user");
@@ -137,8 +133,11 @@ public class ArticleController {
 			map.put("data", "请登录后在发帖！");
 			return map;
 		}
-		String author = userService.getUserByID(uid).getUsername();
-		int result = articleService.addArticle(title,content,new Timestamp(new Date().getTime()),uid,author,lable);
+		if(StringUtils.isEmpty(title) || StringUtils.isBlank(title)){
+			map.put("data", "标题不能为空！");
+			return map;
+		}
+		int result = articleService.addArticle(title,content,new Timestamp(new Date().getTime()),uid,lable);
 		if(result>0){
 			LogUtils.info("发帖成功,标题:{},内容长度:{}",title,content.length());
 			map.put("data", "发帖成功！");
@@ -153,7 +152,7 @@ public class ArticleController {
 	 * @param key
 	 * @return
 	 */
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	@RequestMapping("/search")
 	public ModelAndView SearchArticle(@RequestParam("key")String key){
 		ModelAndView mav = new ModelAndView();
 		List<Article> list = articleService.searchArticleByKey(key);
