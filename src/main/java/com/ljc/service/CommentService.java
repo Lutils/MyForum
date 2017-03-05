@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.ljc.entity.Comment;
+import com.ljc.entity.Floor;
 
 
 public interface CommentService {
@@ -32,5 +33,24 @@ public interface CommentService {
 	 * @return
 	 */
 	public int getCommentCount(Integer aid);
+
+	/**
+	 * 根据cid获取楼中楼评论数据
+	 * @param aid
+	 * @param cid
+	 * @return
+	 */
+	public List<Floor> findFloorComment(Integer aid, Integer cid);
+
+	/**
+	 * 添加楼中楼评论
+	 * @param aid
+	 * @param cid
+	 * @param uid
+	 * @param content
+	 * @return
+	 */
+	public int addFloorComment(Integer aid, Integer cid, Integer uid,
+			String content);
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ljc.entity.Comment;
+import com.ljc.entity.Floor;
 
 public interface CommentDao {
 
@@ -17,5 +18,10 @@ public interface CommentDao {
 	public List<Comment> findComment(@Param("aid")Integer aid, @Param("uid")Integer uid);
 
 	public int getCommentCount(@Param("aid")Integer aid);
+
+	public List<Floor> findFloorComment(@Param("aid")Integer aid, @Param("cid")Integer cid);
+
+	public int addFloorComment(@Param("aid")Integer aid, @Param("cid")Integer cid,
+			@Param("uid")Integer uid, @Param("content")String content);
 
 }

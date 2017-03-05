@@ -13,7 +13,7 @@
 		<img src="${pageContext.request.contextPath}/resources/imgs/logo.png"
 			class="img-responsive" alt="安徽大学">
 		<div class="page-header">
-			<h4>${article.title }</h4>
+			<h4><c:out value="${article.title }"></c:out></h4>
 		</div>
 		<div class="row">
 			<div class="panel panel-default" style="border-radius : 0;">
@@ -21,7 +21,7 @@
 					<div class="col-md-2">
 						<center>
 							<a href="${pageContext.request.contextPath}/user/info/${author.uid}" target="_blank">
-							<img alt="headimg" style="width: 70%;" src="<c:url value="${author.headimg }"/>" class="img-thumbnail"></a>
+							<img alt="headimg" style="width: 111px;" src="<c:url value="${author.headimg }"/>" class="img-thumbnail"></a>
 							<br><br>楼主 :<a href="${pageContext.request.contextPath}/user/info/${author.uid}" target="_blank">${author.username }</a>
 						</center>
 					</div>
@@ -32,7 +32,7 @@
 				<h6 style="float: right;">
 					发布时间:
 					<fmt:formatDate value="${article.date }"
-						pattern="MM/dd HH:mm:ss" />
+						pattern="MM/dd HH:mm:ss" />&nbsp;
 				</h6>
 			</div>
 		</div>
@@ -44,10 +44,10 @@
 			<div class="row">
 				<div class="panel panel-default" style="border-radius : 0;">
 					<div class="panel-body">
-						<div class="col-md-2">
+ 						<div class="col-md-2">
 							<center>
 								<a href="${pageContext.request.contextPath}/user/info/${c.uid}" target="_blank">
-									<img alt="headimg" style="width: 70%;" src="<c:url value="${c.uimg }"/>" class="img-thumbnail"> 
+									<img alt="headimg" style="width: 111px;" src="<c:url value="${c.uimg }"/>" class="img-thumbnail"> 
 								</a>
 								<br><br>
 								<c:if test="${c.uid eq article.uid }">楼主:</c:if>
@@ -56,15 +56,45 @@
 						</div>
 						<div class="col-md-8">
 							<c:out value="${c.content }" escapeXml="false"></c:out>
-						</div>
+							<br><br><hr/>
+							<%-- 楼中楼评论数据 --%>
+							<div class="media" id="media${c.cid }">
+					            <c:forEach var="f" items="${Floor }">
+						            <c:if test="${f.cid eq c.cid }">
+						            	<!-- 头像 -->
+		 					            <div class="media-left">
+							              <a href="${pageContext.request.contextPath}/user/info/${f.uid}" target="_blank">
+							                <img class="media-object" style="width: 34px;" src="<c:url value="${f.uimg }"/>">
+							              </a>
+							            </div>
+							            <!-- 评论内容 -->
+							            <div class="media-body">
+								            <a href="${pageContext.request.contextPath}/user/info/${f.uid}" target="_blank">${f.cuser }</a>:<c:out value="${f.content }"></c:out>
+							            </div>
+							            <br>
+						            </c:if>
+					            </c:forEach>
+					            
+			          		</div>
+						</div>			
 					</div>
-					<h6 style="float: right;">
-						<%-- ${fn:length(commentList)-st.index }楼 --%>
-						${st.index+1 }楼
-						回复时间:
-						<fmt:formatDate value="${c.date }"
-							pattern="MM/dd HH:mm:ss" />
-					</h6>
+					<div class="replyMsg">
+						<h6 style="float: right;">
+							<%-- ${fn:length(commentList)-st.index }楼 --%>
+							${st.index+1 }楼
+							<fmt:formatDate value="${c.date }"
+								pattern="MM/dd HH:mm:ss" />
+							<a onclick="openFloorInput(${c.cid })">&nbsp;回复&nbsp;</a>
+						</h6>
+					</div>
+				</div>
+				
+
+				<%-- 楼中楼评论框 --%>
+				<br>
+				<div class="floor" id="floor${c.cid }" style="display: none;width: 40%;float: right;">
+					<textarea class="form-control" rows="3" id="text${c.cid }"></textarea>
+					<input class="btn btn-primary" type="submit" onClick="floorReply(${c.cid })" value="回复" style="float: right;">
 				</div>
 			</div>
 		</c:forEach>
@@ -101,6 +131,43 @@
 			alert(data.data);
 			location.href = "${pageContext.request.contextPath}/article/details/${article.aid }";
 		}, "json");
+	}
+	/*楼中楼回复框*/
+	function openFloorInput(num){
+  		$('#floor'+num).slideToggle();
+  		$('#text'+num).focus();
+	}
+	function floorReply(num){
+		//文本框内容
+		var t = $('#text'+num).val();
+		//请求服务器,插入评论
+		var url = "${pageContext.request.contextPath}/article/floor/add";
+		var params = {
+			cid : num,
+			aid : ${article.aid },
+			uid : '${user.uid}',
+			content : t,
+		};
+		$.ajax({
+			'url' : url,
+			'data' : params,
+			'type' : 'POST',
+			'success' : function(data) {
+				//js插入评论数据
+				var t1 = '<div class="media-left">'+
+				  '<a href="${pageContext.request.contextPath}/user/info/${user.uid}"><img class="media-object" src="${pageContext.request.contextPath}/${user.headimg }" style="width:34px;"></a>'+
+				'</div>'+
+				'<div class="media-body">'+
+				  '<a href="${pageContext.request.contextPath}/user/info/${user.uid}" target="_blank">${user.username }</a>:'+t+
+				'</div>';
+				$('#media'+num).append(t1);
+				$('#text'+num).val('');
+				$('#floor'+num).slideUp();
+			},
+			'error' : function() {
+				alert("回复失败！");
+			}
+		});	
 	}
 </script>
 </body>

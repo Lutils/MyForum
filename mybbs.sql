@@ -1,16 +1,16 @@
 /*
-Navicat MariaDB Data Transfer
+Navicat MySQL Data Transfer
 
-Source Server         : 123.206.218.51_3306
-Source Server Version : 50552
-Source Host           : 123.206.218.51:3306
+Source Server         : localhost_3306
+Source Server Version : 50716
+Source Host           : localhost:3306
 Source Database       : mybbs
 
-Target Server Type    : MariaDB
-Target Server Version : 50552
+Target Server Type    : MYSQL
+Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-02-28 22:38:51
+Date: 2017-03-05 19:38:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,7 +29,7 @@ CREATE TABLE `article` (
   PRIMARY KEY (`aid`),
   KEY `uid` (`uid`),
   CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of article
@@ -45,10 +45,7 @@ INSERT INTO `article` VALUES ('57', 'test', '<p>111<img src=\"http://img.t.sinaj
 INSERT INTO `article` VALUES ('61', '测试分页', '<p>111111111</p>', '2017-02-10 15:24:48', '2', '');
 INSERT INTO `article` VALUES ('62', '1111111', '<p>1111111</p>', '2017-02-10 15:25:43', '2', '');
 INSERT INTO `article` VALUES ('68', '测试测试。。。', '<p><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/0b/tootha_thumb.gif\"></p><p>1<b>232</b>13<font color=\"#880000\">2</font></p><p><font color=\"#000000\" face=\"微软雅黑\">dwddwqd<font size=\"6\">wqdd</font>wdw wedewdwe</font></p><p><a href=\"http://baidu.com\" target=\"_blank\" style=\"background-color: rgb(255, 255, 255);\">百度一下。。</a></p><p><br></p>', '2017-02-10 17:54:42', '1', '123');
-INSERT INTO `article` VALUES ('71', '上线的第三篇帖子、、。。。。', '<p>不会再有乱码了吧。。。。。<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/af/kl_thumb.gif\"></p><p><br></p>', '2017-02-10 20:07:09', '1', '啊啊啊');
-INSERT INTO `article` VALUES ('73', 'test', '<p>1111<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/4a/mm_thumb.gif\"></p><p><br></p>', '2017-02-10 20:15:54', '3', 'qqq');
-INSERT INTO `article` VALUES ('75', '1111', '<p>www<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/7a/shenshou_thumb.gif\"></p><p><br></p>', '2017-02-20 14:58:20', '1', '');
-INSERT INTO `article` VALUES ('76', '1111', '<p>拉拉阿拉</p><p><br></p>', '2017-02-20 15:05:07', '2', 'www');
+INSERT INTO `article` VALUES ('70', '啦啦啦啦', '<p>1111111111<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/b6/sb_thumb.gif\"></p><p><br></p>', '2017-02-28 22:09:05', '1', '123');
 
 -- ----------------------------
 -- Table structure for comment
@@ -65,7 +62,7 @@ CREATE TABLE `comment` (
   KEY `uid` (`uid`),
   CONSTRAINT `aid` FOREIGN KEY (`aid`) REFERENCES `article` (`aid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comment
@@ -90,17 +87,33 @@ INSERT INTO `comment` VALUES ('20', '<p><img src=\"http://img.t.sinajs.cn/t4/app
 INSERT INTO `comment` VALUES ('21', '<p>1111<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/6e/panda_thumb.gif\"></p><p><br></p>', '68', '1', '2017-02-10 17:55:52');
 INSERT INTO `comment` VALUES ('22', '<p>qqq<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/40/cool_thumb.gif\"></p><p><br></p>', '68', '2', '2017-02-10 17:56:22');
 INSERT INTO `comment` VALUES ('23', '<p><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/b6/doge_thumb.gif\"></p><p><br></p>', '68', '10', '2017-02-10 17:58:19');
-INSERT INTO `comment` VALUES ('28', '<p><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/b6/doge_thumb.gif\"></p><p><br></p>', '71', '1', '2017-02-10 20:07:19');
-INSERT INTO `comment` VALUES ('29', '<p>1111<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/0b/tootha_thumb.gif\"></p><p><br></p>', '71', '2', '2017-02-10 20:08:11');
-INSERT INTO `comment` VALUES ('33', '<p><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/6e/panda_thumb.gif\"></p><p><br></p>', '71', '10', '2017-02-10 20:15:06');
-INSERT INTO `comment` VALUES ('34', '<p><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/6e/panda_thumb.gif\"><img src=\"/MyForum/resources/upload/338353608992527.png&#10;\" alt=\"logo\" style=\"max-width: 100%; width: 225px; height: 44px;\" class=\"\"></p><p>qqqq啊<font size=\"5\">啊</font><font size=\"7\">啊，</font></p><p><a href=\"http://baidu.com\" target=\"_blank\"><font size=\"4\">百度一下</font></a></p><p><br></p>', '73', '3', '2017-02-10 20:16:56');
-INSERT INTO `comment` VALUES ('35', '<p><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/b6/doge_thumb.gif\"></p><p><br></p>', '73', '1', '2017-02-10 20:17:18');
-INSERT INTO `comment` VALUES ('36', '<p><img src=\"/MyForum/resources/upload/8571813841204672.jpg&#10;\" alt=\"top\" style=\"max-width: 100%; width: 418px; height: 75px;\" class=\"\"><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/b6/doge_thumb.gif\"></p><p><br></p>', '73', '1', '2017-02-11 10:25:13');
-INSERT INTO `comment` VALUES ('37', '<p>11111111</p>', '73', '1', '2017-02-11 10:25:25');
-INSERT INTO `comment` VALUES ('40', '<p><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/b6/doge_thumb.gif\"></p><p><br></p>', '75', '1', '2017-02-20 14:58:34');
-INSERT INTO `comment` VALUES ('41', '<p><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/4a/mm_thumb.gif\"></p><p><br></p>', '75', '10', '2017-02-20 14:58:55');
-INSERT INTO `comment` VALUES ('42', '<p><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/af/cry.gif\"></p><p><br></p>', '76', '2', '2017-02-20 15:05:15');
-INSERT INTO `comment` VALUES ('43', '<p><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/b6/doge_thumb.gif\"></p><p><br></p>', '76', '1', '2017-02-20 15:05:38');
+INSERT INTO `comment` VALUES ('24', '<p>sss</p>', '62', '1', '2017-02-20 14:48:24');
+INSERT INTO `comment` VALUES ('25', '<p>wwww</p>', '62', '1', '2017-02-20 14:50:03');
+INSERT INTO `comment` VALUES ('26', '<p>1111</p>', '68', '1', '2017-02-28 17:54:49');
+INSERT INTO `comment` VALUES ('27', '<p><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/af/cry.gif\"></p><p><br></p>', '68', '1', '2017-02-28 17:55:01');
+INSERT INTO `comment` VALUES ('28', '<p>11<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/5c/huanglianwx_thumb.gif\"></p><p><br></p>', '62', '1', '2017-02-28 18:38:16');
+INSERT INTO `comment` VALUES ('29', '<p>qqq</p>', '68', '2', '2017-02-28 21:55:45');
+INSERT INTO `comment` VALUES ('30', '<p><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/4a/mm_thumb.gif\"></p><p><br></p>', '70', '1', '2017-02-28 22:09:56');
+
+-- ----------------------------
+-- Table structure for floor
+-- ----------------------------
+DROP TABLE IF EXISTS `floor`;
+CREATE TABLE `floor` (
+  `fid` int(11) NOT NULL AUTO_INCREMENT,
+  `aid` int(11) NOT NULL,
+  `cid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`fid`),
+  KEY `cid` (`cid`),
+  CONSTRAINT `cid` FOREIGN KEY (`cid`) REFERENCES `comment` (`cid`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of floor
+-- ----------------------------
+INSERT INTO `floor` VALUES ('18', '70', '30', '1', '123');
 
 -- ----------------------------
 -- Table structure for user
@@ -113,18 +126,17 @@ CREATE TABLE `user` (
   `headimg` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`uid`),
   KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'ljc', '202cb962ac59075b964b07152d234b70', '/resources/upload/570ea2f2-ff55-42de-a038-df20a4d22197.jpg');
-INSERT INTO `user` VALUES ('2', 'test', '202cb962ac59075b964b07152d234b70', '/resources/upload/6f6405c9-1ab5-4f95-a1d3-2ce3b04a548a.jpg');
+INSERT INTO `user` VALUES ('1', 'ljc', '202cb962ac59075b964b07152d234b70', '/resources/imgs/head.png');
+INSERT INTO `user` VALUES ('2', 'test', '202cb962ac59075b964b07152d234b70', '/resources/imgs/head.png');
 INSERT INTO `user` VALUES ('3', 'test1', '202cb962ac59075b964b07152d234b70', '/resources/imgs/head.png');
-INSERT INTO `user` VALUES ('10', '卢建成', '202cb962ac59075b964b07152d234b70', '/resources/upload/8c469805-2da4-4746-a2bd-460512984020.jpg');
+INSERT INTO `user` VALUES ('10', '卢建成', '202cb962ac59075b964b07152d234b70', '/resources/imgs/head.png');
 INSERT INTO `user` VALUES ('11', 'test2', '202cb962ac59075b964b07152d234b70', '/resources/imgs/head.png');
 INSERT INTO `user` VALUES ('12', 'test3', '202cb962ac59075b964b07152d234b70', '/resources/imgs/head.png');
 INSERT INTO `user` VALUES ('14', 'test4', '202cb962ac59075b964b07152d234b70', '/resources/imgs/head.png');
 INSERT INTO `user` VALUES ('15', '123', '202cb962ac59075b964b07152d234b70', '/resources/imgs/head.png');
-INSERT INTO `user` VALUES ('16', '', '404', '/resources/imgs/head.png');
 SET FOREIGN_KEY_CHECKS=1;

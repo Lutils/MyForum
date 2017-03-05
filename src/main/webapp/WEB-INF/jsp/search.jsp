@@ -17,10 +17,11 @@
 			  <tr>
 			  	<td>
 				  	<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
-				  	<a href="${pageContext.request.contextPath}/article/details/${s.aid }" target="_blank">${s.title }</a>
+				  	<a href="${pageContext.request.contextPath}/article/details/${s.aid }" target="_blank">
+				  	<c:out value="${s.title }"></c:out>
+				  	</a>
 				  	<div style="float: right;">
-				  		${s.author } / 
-					  	<fmt:formatDate value="${s.date }" pattern="yyyy/MM/dd HH:mm:ss" />
+				  		 / <fmt:formatDate value="${s.date }" pattern="yyyy/MM/dd HH:mm:ss" />
 				  	</div>
 				</td>
 			  </tr>

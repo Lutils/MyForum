@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ljc.dao.CommentDao;
 import com.ljc.entity.Comment;
+import com.ljc.entity.Floor;
 import com.ljc.service.CommentService;
 
 @Service("commentService")
@@ -29,6 +30,17 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public int getCommentCount(Integer aid) {
 		return commentDao.getCommentCount(aid);
+	}
+
+	@Override
+	public List<Floor> findFloorComment(Integer aid, Integer cid) {
+		return commentDao.findFloorComment(aid, cid);
+	}
+
+	@Override
+	public int addFloorComment(Integer aid, Integer cid, Integer uid,
+			String content) {
+		return commentDao.addFloorComment(aid,cid,uid,content);
 	}
 
 }

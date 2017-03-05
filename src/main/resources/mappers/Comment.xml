@@ -14,6 +14,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="uimg" column="headimg"/>
 	</resultMap>
 	
+	<resultMap type="Floor" id="FloorResult">
+		<id property="fid" column="fid"/>
+		<result property="cid" column="cid"/>
+		<result property="uid" column="uid"/>
+		<result property="content" column="content"/>
+		<result property="cuser" column="cuser"/>
+		<result property="uimg" column="headimg"/>
+	</resultMap>
+	
 	<insert id="addComment">
 		insert into comment(content,aid,uid,date) values(#{content},#{aid},#{uid},#{date})
 	</insert>
@@ -36,5 +45,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getCommentCount" resultType="java.lang.Integer">
 		select count(*) from comment where aid=#{aid}
 	</select>
+	
+	<select id="findFloorComment" resultMap="FloorResult">
+		select
+			fid,cid,floor.uid,content,username as cuser,headimg as uimg 
+		from 
+			floor,user
+		where 
+			floor.uid=user.uid
+		<if test="aid!=null">
+			and aid=#{aid}
+		</if>
+		<if test="cid!=null">
+			and cid=#{cid}
+		</if>
+	</select>
+	
+	<insert id="addFloorComment">
+		insert into floor(aid,cid,uid,content) values(#{aid},#{cid},#{uid},#{content})
+	</insert>
 	
 </mapper>

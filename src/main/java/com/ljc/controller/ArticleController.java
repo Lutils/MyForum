@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ljc.entity.Article;
 import com.ljc.entity.Comment;
+import com.ljc.entity.Floor;
 import com.ljc.entity.User;
 import com.ljc.service.ArticleService;
 import com.ljc.service.CommentService;
@@ -70,22 +70,59 @@ public class ArticleController {
 	 * @return
 	 */
 	@RequestMapping("/details/{aid}")
-	public ModelAndView getArticleByID(Model model,@PathVariable("aid") Integer aid){
+	public ModelAndView getArticleByID(@PathVariable("aid") Integer aid){
 		ModelAndView mav = new ModelAndView();
 		//帖子数据
 		Article article = articleService.getArticleByID(aid);
 		//评论数据
 		List<Comment> commentList = commentService.findComment(aid, null);
+		//楼中楼评论数据
+		List<Floor> floorCommentList = commentService.findFloorComment(aid, null);
 		//数据存放至Model
 		mav.addObject(article);
 		mav.addObject(commentList);
+		mav.addObject("Floor", floorCommentList);
 		//帖子作者
 		mav.addObject("author", userService.getUserByID(article.getUid()));
 		//设置视图
 		mav.setViewName("article/articleContent");
 		return mav;
 	}
-	
+
+	/**
+	 * 添加楼中楼评论
+	 * @param aid
+	 * @param cid
+	 * @param uid
+	 * @param content
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/floor/add", method = RequestMethod.POST)
+	public Map<String,String> findFloorComment(HttpSession session,
+			@RequestParam("aid") Integer aid,
+			@RequestParam("cid") Integer cid,
+			@RequestParam("uid") Integer uid,
+			@RequestParam("content") String content){
+		Map<String,String> map = new HashMap<String,String>();
+		//身份检测
+		User user = (User) session.getAttribute("user");	//当前登录用户
+		if(user.getUid() != uid){
+			map.put("data", "回复失败！");
+			return map;
+		}
+		//楼中楼评论数据
+		int result = commentService.addFloorComment(aid,cid,uid,content);
+		if(result>0){
+			LogUtils.info("楼中楼评论成功!内容=>"+content);
+//			map.put("data", "回复成功！");
+		}else{
+			LogUtils.info("楼中楼评论失败!");
+//			map.put("data", "回复失败！");
+		}
+		return map;
+	}
+
 	/**
 	 * 根据id删除帖子数据
 	 * @param aid

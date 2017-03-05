@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=0.3">
-<title>首页</title>
+<title>主页</title>
 <%@include file="../common/import.jsp"%>
 </head>
 <body>
@@ -16,7 +16,9 @@
 				<c:forEach var="t" items="${articlePageBean.list }">
 					<div class="page-header">
 						<h4>
-							<a href="${pageContext.request.contextPath}/article/details/${t.aid }" target="_blank">${t.title }</a>
+							<a href="${pageContext.request.contextPath}/article/details/${t.aid }" target="_blank">
+								<c:out value="${t.title }"></c:out>
+							</a>
 							<div style="float: right;">
 								<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 								<a href="${pageContext.request.contextPath}/user/info/${t.uid}" target="_blank">${t.author }</a>
@@ -46,7 +48,7 @@
 				<c:choose>
 					<c:when test="${!empty user }">
 						<div style="padding-top: 200px;">
-							<input type="text" class="form-control" maxlength="20" id="title" placeholder="输入帖子标题"><br />
+							<input type="text" class="form-control" maxlength="50" id="title" placeholder="输入帖子标题"><br />
 							<div id="content" style="height:240px;"></div><br>
 							<button type="button" class="btn btn-primary" id="addbtn"
 								onclick="doClick()" style="float: right;">发布</button>
