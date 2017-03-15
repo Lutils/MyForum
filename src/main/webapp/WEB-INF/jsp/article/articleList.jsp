@@ -10,29 +10,33 @@
 </head>
 <body>
 	<div class="container" style="box-shadow: 0px 0px 1px #666;">
-		<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" class="img-responsive" alt="安徽大学">
+		<%@include file="../common/head.jsp"%>
 		<div class="row">
 			<div class="col-md-8">
+				<%-- 置顶的帖子 --%>
 				<c:forEach var="t" items="${articlePageBean.list }">
-					<div class="page-header">
-						<h4>
-							<a href="${pageContext.request.contextPath}/article/details/${t.aid }" target="_blank">
-								<c:out value="${t.title }"></c:out>
-							</a>
-							<div style="float: right;">
-								<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-								<a href="${pageContext.request.contextPath}/user/info/${t.uid}" target="_blank">${t.author }</a>
-							</div>
-							<br />
-						</h4>
-						<c:if test="${!empty t.lable }">
-							<span class="label label-success">#${t.lable }#</span>
-						</c:if>
-						<p style="float: right;">
-							<fmt:formatDate value="${t.date }" pattern="MM/dd HH:mm:ss" />
-						</p>
-						<br>
-					</div>
+					<c:if test="${t.status eq 1 or t.status eq 3}">
+						<div class="page-header">
+							<h4>
+								<span class="label label-primary">置顶</span>
+								<c:if test="${t.status eq 3}">
+									<span class="label label-danger">精</span>
+								</c:if>
+						<%@include file="../common/articleData.jsp"%>
+						</div>
+					</c:if>
+				</c:forEach>
+				<%-- 未置顶的帖子 --%>
+				<c:forEach var="t" items="${articlePageBean.list }">
+					<c:if test="${t.status ne 1 and t.status ne 3}">
+						<div class="page-header">
+							<h4>
+								<c:if test="${t.status eq 2}">
+									<span class="label label-danger">精</span>
+								</c:if>
+								<%@include file="../common/articleData.jsp"%>
+						</div>
+					</c:if>
 				</c:forEach>
 				<%-- 分页  --%>
 				<div style="float: right;">
@@ -64,15 +68,6 @@
 				<%@include file="../common/foot.jsp"%>
 			</div>
 			<div class="col-md-4">
-				<%-- 搜索框 --%>
-				<div class="search">
-					<form action="${pageContext.request.contextPath}/article/search" method="post" class="navbar-form navbar-left" role="search" style="float: right;">
-					    <input type="text"  name="key" class="form-control" placeholder="Search">
-					  	<button type="submit" class="btn btn-default">
-					  		<span class="glyphicon glyphicon-search"></span> 搜索
-					  	</button>
-					</form>
-				</div>
 				<%-- 用户头像昵称 --%>
 				<div style="padding-top: 120px;">
 					<center>

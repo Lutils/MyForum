@@ -10,8 +10,7 @@
 </head>
 <body>
 	<div class="container" style="box-shadow: 0px 0px 1px #666;">
-		<img src="${pageContext.request.contextPath}/resources/imgs/logo.png"
-			class="img-responsive" alt="安徽大学">
+		<%@include file="../common/head.jsp"%>
 		<div class="page-header">
 			<h4><c:out value="${article.title }"></c:out></h4>
 		</div>

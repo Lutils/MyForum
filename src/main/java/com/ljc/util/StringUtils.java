@@ -1,4 +1,4 @@
-package com.ljc.utils;
+package com.ljc.util;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

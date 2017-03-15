@@ -10,7 +10,9 @@
 </head>
 <body>
 	<div class="container" style="box-shadow: 0px 0px 1px #666;">
-		<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" class="img-responsive" alt="安徽大学"><br>
+		<a href="${pageContext.request.contextPath}/index.jsp">
+			<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" class="img-responsive" alt="安徽大学">
+		</a><br>
 		<c:choose>
 			<c:when test="${user.uid eq u.uid }">
 				<div class="row">

@@ -7,7 +7,7 @@
 	//获得文本编辑器对象
     var editor = new wangEditor('content');
     //上传图片地址
-    editor.config.uploadImgUrl = '${pageContext.request.contextPath}/upload.html';
+    editor.config.uploadImgUrl = '${pageContext.request.contextPath}/upload';
     //图片参数
     editor.config.uploadImgFileName = 'file';
     // 普通的自定义菜单

@@ -24,8 +24,8 @@ import com.ljc.entity.User;
 import com.ljc.service.ArticleService;
 import com.ljc.service.CommentService;
 import com.ljc.service.UserService;
-import com.ljc.utils.LogUtils;
-import com.ljc.utils.StringUtils;
+import com.ljc.util.LogUtils;
+import com.ljc.util.StringUtils;
 
 /**
  * @author LJC 

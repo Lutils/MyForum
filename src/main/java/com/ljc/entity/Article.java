@@ -19,6 +19,7 @@ public class Article implements Serializable {
 	private Integer uid; // 发帖用户id
 	private String author; // 发帖人昵称
 	private String lable; // 帖子标签
+	private Integer status; // 置顶:1、加精:2、加精且置顶:3
 
 	public Integer getAid() {
 		return aid;
@@ -74,6 +75,14 @@ public class Article implements Serializable {
 
 	public void setLable(String lable) {
 		this.lable = lable;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 }

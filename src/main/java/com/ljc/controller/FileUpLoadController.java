@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ljc.utils.LogUtils;
-import com.ljc.utils.ResponseUtils;
+import com.ljc.util.LogUtils;
+import com.ljc.util.ResponseUtils;
 
 /**
  * @author LJC 

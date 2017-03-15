@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ljc.service.CommentService;
 import com.ljc.service.UserService;
-import com.ljc.utils.LogUtils;
+import com.ljc.util.LogUtils;
 
 /**
  * @author LJC

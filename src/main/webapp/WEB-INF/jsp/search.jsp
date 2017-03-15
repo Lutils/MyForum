@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="container" style="box-shadow: 0px 0px 1px #666;">
-		<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" class="img-responsive" alt="安徽大学"><br>
+		<%@include file="common/head.jsp"%><br>
 		<h4>查询关键字:"${key }",共查到${fn:length(resultList) }篇帖子！</h3>
 		<table class="table table-hover">
 			<c:forEach var="s" items="${resultList }">

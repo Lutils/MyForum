@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="uid" column="uid"/>
 		<result property="author" column="author"/>
 		<result property="lable" column="lable"/>
+		<result property="status" column="status"/>
 	</resultMap>
 	
 	<select id="getArticleList" resultMap="ArticleResult">
@@ -20,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getArticlePageList" resultMap="ArticleResult">
 		select
-			aid,title,content,date,article.uid,username as author,lable
+			aid,title,content,date,article.uid,username as author,lable,status
 		from
 			article,user
 		where
