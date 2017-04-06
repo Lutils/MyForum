@@ -19,9 +19,9 @@
 				<div class="panel-body">
 					<div class="col-md-2">
 						<center>
-							<a href="${pageContext.request.contextPath}/user/info/${author.uid}" target="_blank">
-							<img alt="headimg" style="width: 111px;" src="<c:url value="${author.headimg }"/>" class="img-thumbnail"></a>
-							<br><br>楼主 :<a href="${pageContext.request.contextPath}/user/info/${author.uid}" target="_blank">${author.username }</a>
+							<a href="${pageContext.request.contextPath}/user/info/${article.author.uid}" target="_blank">
+							<img alt="headimg" style="width: 111px;" src="<c:url value="${article.author.headimg }"/>" class="img-thumbnail"></a>
+							<br><br>楼主 :<a href="${pageContext.request.contextPath}/user/info/${article.author.uid }" target="_blank">${article.author.username }</a>
 						</center>
 					</div>
 					<div class="col-md-8">
@@ -46,11 +46,11 @@
  						<div class="col-md-2">
 							<center>
 								<a href="${pageContext.request.contextPath}/user/info/${c.uid}" target="_blank">
-									<img alt="headimg" style="width: 111px;" src="<c:url value="${c.uimg }"/>" class="img-thumbnail"> 
+									<img alt="headimg" style="width: 111px;" src="<c:url value="${c.replyer.headimg }"/>" class="img-thumbnail"> 
 								</a>
 								<br><br>
 								<c:if test="${c.uid eq article.uid }">楼主:</c:if>
-								<a href="${pageContext.request.contextPath}/user/info/${c.uid}" target="_blank">${c.cuser }</a>
+								<a href="${pageContext.request.contextPath}/user/info/${c.uid}" target="_blank">${c.replyer.username }</a>
 							</center>
 						</div>
 						<div class="col-md-8">
@@ -63,12 +63,12 @@
 						            	<!-- 头像 -->
 		 					            <div class="media-left">
 							              <a href="${pageContext.request.contextPath}/user/info/${f.uid}" target="_blank">
-							                <img class="media-object" style="width: 34px;" src="<c:url value="${f.uimg }"/>">
+							                <img class="media-object" style="width: 34px;" src="<c:url value="${f.floorReplyer.headimg }"/>">
 							              </a>
 							            </div>
 							            <!-- 评论内容 -->
 							            <div class="media-body">
-								            <a href="${pageContext.request.contextPath}/user/info/${f.uid}" target="_blank">${f.cuser }</a>:<c:out value="${f.content }"></c:out>
+								            <a href="${pageContext.request.contextPath}/user/info/${f.uid}" target="_blank">${f.floorReplyer.username }</a>:<c:out value="${f.content }"></c:out>
 							            </div>
 							            <br>
 						            </c:if>

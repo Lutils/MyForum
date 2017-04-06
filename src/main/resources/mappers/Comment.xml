@@ -9,9 +9,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="content" column="content"/>
 		<result property="aid" column="aid"/>
 		<result property="uid" column="uid"/>
-		<result property="cuser" column="cuser"/>
 		<result property="date" column="date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
-		<result property="uimg" column="headimg"/>
+		<association property="replyer" column="uid" select="com.ljc.dao.UserDao.getUserByID" />
 	</resultMap>
 	
 	<resultMap type="Floor" id="FloorResult">
@@ -19,8 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="cid" column="cid"/>
 		<result property="uid" column="uid"/>
 		<result property="content" column="content"/>
-		<result property="cuser" column="cuser"/>
-		<result property="uimg" column="headimg"/>
+		<association property="floorReplyer" column="uid" select="com.ljc.dao.UserDao.getUserByID" />
 	</resultMap>
 	
 	<insert id="addComment">
@@ -28,9 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="findComment" resultMap="CommentResult">
-		select
-			cid,content,aid,comment.uid,username as cuser,date,headimg as uimg
-		from 
+		select * from 
 			comment,user
 		where 
 			comment.uid=user.uid
@@ -47,9 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="findFloorComment" resultMap="FloorResult">
-		select
-			fid,cid,floor.uid,content,username as cuser,headimg as uimg 
-		from 
+		select * from 
 			floor,user
 		where 
 			floor.uid=user.uid

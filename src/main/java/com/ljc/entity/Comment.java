@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author LJC 
- * 评论内容实体
+ * @author LJC 评论内容实体
  */
 public class Comment implements Serializable {
 
@@ -15,9 +14,8 @@ public class Comment implements Serializable {
 	private String content;
 	private Integer aid;
 	private Integer uid;
-	private String cuser; // 评论者昵称
 	private Date date;
-	private String uimg;	//评论者头像
+	private User replyer;
 
 	public Integer getCid() {
 		return cid;
@@ -51,14 +49,6 @@ public class Comment implements Serializable {
 		this.uid = uid;
 	}
 
-	public String getCuser() {
-		return cuser;
-	}
-
-	public void setCuser(String cuser) {
-		this.cuser = cuser;
-	}
-
 	public Date getDate() {
 		return date;
 	}
@@ -67,12 +57,12 @@ public class Comment implements Serializable {
 		this.date = date;
 	}
 
-	public String getUimg() {
-		return uimg;
+	public User getReplyer() {
+		return replyer;
 	}
 
-	public void setUimg(String uimg) {
-		this.uimg = uimg;
+	public void setReplyer(User replyer) {
+		this.replyer = replyer;
 	}
 
 }

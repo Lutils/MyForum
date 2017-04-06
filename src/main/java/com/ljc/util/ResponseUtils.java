@@ -5,16 +5,11 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * @author LJC
  * response输出工具类
  */
 public class ResponseUtils {
-
-	static Logger logger = LoggerFactory.getLogger(ResponseUtils.class);
 	
 	/**
 	 * 输出Object对象
@@ -27,7 +22,6 @@ public class ResponseUtils {
 		try {
 			out = response.getWriter();
 		} catch (IOException e) {
-			logger.info("response输出失败！" + e);
 			e.printStackTrace();
 		} finally {
 			if (out != null) {

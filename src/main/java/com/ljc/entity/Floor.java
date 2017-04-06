@@ -3,8 +3,7 @@ package com.ljc.entity;
 import java.io.Serializable;
 
 /**
- * @author LJC
- * 楼中楼评论
+ * @author LJC 楼中楼评论
  */
 public class Floor implements Serializable {
 
@@ -14,8 +13,7 @@ public class Floor implements Serializable {
 	private Integer cid;
 	private Integer uid;
 	private String content;
-	private String cuser; // 评论者昵称
-	private String uimg; // 评论者头像
+	private User floorReplyer;
 
 	public Integer getFid() {
 		return fid;
@@ -49,20 +47,12 @@ public class Floor implements Serializable {
 		this.content = content;
 	}
 
-	public String getCuser() {
-		return cuser;
+	public User getFloorReplyer() {
+		return floorReplyer;
 	}
 
-	public void setCuser(String cuser) {
-		this.cuser = cuser;
-	}
-
-	public String getUimg() {
-		return uimg;
-	}
-
-	public void setUimg(String uimg) {
-		this.uimg = uimg;
+	public void setFloorReplyer(User floorReplyer) {
+		this.floorReplyer = floorReplyer;
 	}
 
 }

@@ -4,22 +4,21 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author LJC 
- * 帖子列表实体
+ * @author LJC 帖子列表实体
  */
 
 public class Article implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer aid; // 帖子id
+	private Integer aid;
 	private String title;
 	private String content;
 	private Date date;
-	private Integer uid; // 发帖用户id
-	private String author; // 发帖人昵称
+	private Integer uid;
 	private String lable; // 帖子标签
 	private Integer status; // 置顶:1、加精:2、加精且置顶:3
+	private User author;
 
 	public Integer getAid() {
 		return aid;
@@ -61,11 +60,11 @@ public class Article implements Serializable {
 		this.uid = uid;
 	}
 
-	public String getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(String author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
 

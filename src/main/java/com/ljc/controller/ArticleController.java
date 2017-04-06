@@ -82,8 +82,6 @@ public class ArticleController {
 		mav.addObject(article);
 		mav.addObject(commentList);
 		mav.addObject("Floor", floorCommentList);
-		//帖子作者
-		mav.addObject("author", userService.getUserByID(article.getUid()));
 		//设置视图
 		mav.setViewName("article/articleContent");
 		return mav;
@@ -134,7 +132,8 @@ public class ArticleController {
 		Map<String, String> map = new HashMap<>();
 		//身份检测
 		User user = (User) session.getAttribute("user");	//当前登录用户
-		Integer uid = articleService.getArticleByID(aid).getUid();	//帖子作者
+//		Integer uid = articleService.getArticleByID(aid).getUid();	//帖子作者
+		Integer uid = articleService.getArticleByID(aid).getAuthor().getUid();	//帖子作者
 		if(user.getUid() != uid){
 			map.put("data", "只能删除自己的帖子！");
 			return map;

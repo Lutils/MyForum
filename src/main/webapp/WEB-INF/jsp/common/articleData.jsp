@@ -4,7 +4,7 @@
 </a>
 <div style="float: right;">
 	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-	<a href="${pageContext.request.contextPath}/user/info/${t.uid}" target="_blank">${t.author }</a>
+	<a href="${pageContext.request.contextPath}/user/info/${t.uid}" target="_blank">${t.author.username }</a>
 	</div>
 	<br />
 </h4>

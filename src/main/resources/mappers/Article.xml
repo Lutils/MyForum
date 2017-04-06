@@ -9,10 +9,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="title" column="title"/>
 		<result property="content" column="content"/>
 		<result property="date" column="date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
-		<result property="uid" column="uid"/>
-		<result property="author" column="author"/>
 		<result property="lable" column="lable"/>
 		<result property="status" column="status"/>
+		<association property="author" column="uid" select="com.ljc.dao.UserDao.getUserByID" />
 	</resultMap>
 	
 	<select id="getArticleList" resultMap="ArticleResult">
@@ -20,9 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getArticlePageList" resultMap="ArticleResult">
-		select
-			aid,title,content,date,article.uid,username as author,lable,status
-		from
+		select * from
 			article,user
 		where
 			article.uid = user.uid 
@@ -30,8 +27,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</select>
 	
-	<select id="getArticleByID" resultType="Article">
-		select * from article where aid=#{aid}
+	<select id="getArticleByID" resultMap="ArticleResult">
+		select * from 
+			article,user 
+		where 
+			article.uid = user.uid  
+		and 
+			aid=#{aid}
 	</select>
 	
 	<insert id="addArticle">

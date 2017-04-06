@@ -72,8 +72,8 @@
 				<div style="padding-top: 120px;">
 					<center>
 						<c:choose>
-							<c:when test="${empty user }">
-								<img src="<c:url value="/resources/imgs/head.png"/>" class="img-circle">
+							<c:when test="${empty user }">	
+								<img src="<c:url value="/resources/imgs/head.png"/>" class="img-circle"  data-toggle="modal" data-target="#myModal">
 								<br><br>用户名：
 								<a href="javascript:void(0);" data-toggle="modal" data-target="#myModal">未登录</a>
 							</c:when>
@@ -93,6 +93,8 @@
 			</div>
 		</div>
 	</div>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/myJs.js"/>"></script>
 <script type="text/javascript">
 /*发帖*/
 function doClick() {
@@ -110,7 +112,7 @@ function doClick() {
 		'contentType' : "application/x-www-form-urlencoded; charset=utf-8",
 		'type' : 'POST',
 		'success' : function(data) {
-			alert(data.data);
+			//alert(data.data);
 			location.href = "${pageContext.request.contextPath}/article/list/1";
 		},
 		'error' : function() {
@@ -144,6 +146,7 @@ function login() {
 	}, "json");
 }
 </script>
+<input id="context" type="hidden" value="${pageContext.request.contextPath}">
 <%@include file="../common/editor.jsp"%>
 </body>
 </html>
