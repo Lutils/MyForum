@@ -3,11 +3,9 @@
 #### 开发环境及技术选型
 - Jdk 1.8
 - Mysql 5.7
-- Bootstrap 3
 - Tomcat 7
 - Maven 3.3
+- Bootstrap 3
 - CentOS 7
 
-#### 演示站点:http://123.206.218.51/MyForum
-
-#### 或访问:http://123.206.218.51/AhuLjc 论坛模块  
+#### 演示站点:http://123.206.218.51/MyForum  或访问:http://123.206.218.51/AhuLjc 论坛模块  
