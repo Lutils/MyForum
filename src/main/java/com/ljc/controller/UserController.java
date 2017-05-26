@@ -144,6 +144,9 @@ public class UserController {
 			@RequestParam("file") MultipartFile file,
 			@PathVariable("uid") Integer uid){
 		
+		//防止空白头像的情况
+		if(file.isEmpty()) return null;
+		
 		// 文件名及文件存储位置,保存到 ../resources/upload/ 目录下
 		String fileName = UUID.randomUUID().toString()+"."+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1);
 		String filePath = request.getServletContext().getRealPath("/resources/upload");
