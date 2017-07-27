@@ -26,4 +26,6 @@ public interface ArticleDao {
 	public List<Article> getArticlePageList(@Param("currentPage") int currentPage,@Param("pageSize") int pageSize);
 
 	public List<Article> searchArticleByKey(@Param("key")String key);
+	
+	public List<Article> getArticleListByStatus(List<Integer> statusList);
 }

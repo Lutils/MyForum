@@ -1,10 +1,8 @@
 package com.ljc.controller;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,13 +17,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ljc.config.Config;
 import com.ljc.entity.Article;
 import com.ljc.entity.User;
 import com.ljc.service.ArticleService;
 import com.ljc.service.CommentService;
 import com.ljc.service.UserService;
 import com.ljc.util.LogUtils;
+import com.ljc.util.QiNiuUtils;
 import com.ljc.util.StringUtils;
+import com.qiniu.storage.model.DefaultPutRet;
 
 /**
  * @author LJC 
@@ -64,7 +65,7 @@ public class UserController {
 			return map;
 		}
 		//默认头像
-		String headimg = "/resources/imgs/head.png";
+		String headimg = Config.DEFAULT_HEADIMG_ADDRESS;
 		int result = userService.addUser(username, StringUtils.MD5(password), headimg);
 		if (result > 0) {
 			LogUtils.info("注册成功！用户名:{},密码：{}", username, password);
@@ -143,31 +144,15 @@ public class UserController {
 	public String updateHeadImg(HttpServletRequest request,
 			@RequestParam("file") MultipartFile file,
 			@PathVariable("uid") Integer uid){
-		
 		//防止空白头像的情况
 		if(file.isEmpty()) return null;
-		
-		// 文件名及文件存储位置,保存到 ../resources/upload/ 目录下
-		String fileName = UUID.randomUUID().toString()+"."+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1);
-		String filePath = request.getServletContext().getRealPath("/resources/upload");
-
-		LogUtils.info("文件名:{},文件存储路径:{}", fileName, filePath);
-
-		// 上传文件到服务器
-		try {
-			file.transferTo(new File(filePath + File.separator + fileName));
-		} catch (Exception e) {
-			LogUtils.info("文件上传失败！" + e);
-			e.printStackTrace();
-		}
-
-		// 文件地址
-		String headImgName = "/resources/upload/" + fileName;
-		
-		int result = userService.updateHeadImg(headImgName,uid);
-		if(result>0){
-			LogUtils.info("成功更新uid为{}的用户头像,文件名{}",uid,headImgName);
-		}else{
+		//进行上传操作
+		DefaultPutRet putRet = QiNiuUtils.upLoad(file, Config.QINIU_BUCKET_HEADIMG);
+		//头像地址并更根据uid插入对应数据库
+		int result = userService.updateHeadImg(Config.QINIU_IMG_URL + putRet.key,uid);
+		if(result > 0){
+			LogUtils.info("成功更新uid为{}的用户头像,文件名{}",uid,putRet.key);
+		} else {
 			LogUtils.info("更新头像失败！");
 		}
 		//刷新session

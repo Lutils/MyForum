@@ -14,8 +14,7 @@
 		<div class="row">
 			<div class="col-md-8">
 				<%-- 置顶的帖子 --%>
-				<c:forEach var="t" items="${articlePageBean.list }">
-					<c:if test="${t.status eq 1 or t.status eq 3}">
+				<c:forEach var="t" items="${topArticle }">
 						<div class="page-header">
 							<h4>
 								<span class="label label-primary">置顶</span>
@@ -24,7 +23,6 @@
 								</c:if>
 						<%@include file="../common/articleData.jsp"%>
 						</div>
-					</c:if>
 				</c:forEach>
 				<%-- 未置顶的帖子 --%>
 				<c:forEach var="t" items="${articlePageBean.list }">

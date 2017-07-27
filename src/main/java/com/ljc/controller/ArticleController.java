@@ -1,6 +1,7 @@
 package com.ljc.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ljc.config.Config;
 import com.ljc.entity.Article;
 import com.ljc.entity.Comment;
 import com.ljc.entity.Floor;
@@ -53,8 +55,14 @@ public class ArticleController {
 	public ModelAndView getArticlePageList(HttpSession session,
 			@PathVariable("currentPage") int currentPage){
 		ModelAndView mav = new ModelAndView();
-		int pageSize = 10;// 每页记录数
+		int pageSize = Config.DEFAULT_PAGESIZE;// 每页记录数
 		mav.addObject("articlePageBean", articleService.getArticlePageList(currentPage,pageSize));
+
+		List<Integer> statusList = new ArrayList<>();
+		statusList.add(Config.STATUS_TOP);	//置顶帖
+		statusList.add(Config.STATUS_TOP_HOT);	//置顶且加精帖
+		mav.addObject("topArticle", articleService.getArticleListByStatus(statusList));
+		
 		//刷新session
 		if(session.getAttribute("user") != null){
 			User user = (User) session.getAttribute("user");

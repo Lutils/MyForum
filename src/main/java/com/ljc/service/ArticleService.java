@@ -60,5 +60,12 @@ public interface ArticleService {
 	 * @return
 	 */
 	public List<Article> searchArticleByKey(String key);
+	
+	/**
+	 * 通过staus关键字查询帖子
+	 * @param statusList
+	 * @return
+	 */
+	public List<Article> getArticleListByStatus(List<Integer> statusList);
 
 }

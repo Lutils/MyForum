@@ -59,5 +59,10 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleDao.searchArticleByKey(key);
 	}
 
+	@Override
+	public List<Article> getArticleListByStatus(List<Integer> statusList) {
+		return articleDao.getArticleListByStatus(statusList);
+	}
+
 
 }

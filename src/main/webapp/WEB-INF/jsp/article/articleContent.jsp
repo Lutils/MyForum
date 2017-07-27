@@ -68,7 +68,9 @@
 							            </div>
 							            <!-- 评论内容 -->
 							            <div class="media-body">
-								            <a href="${pageContext.request.contextPath}/user/info/${f.uid}" target="_blank">${f.floorReplyer.username }</a>:<c:out value="${f.content }"></c:out>
+								            <a href="${pageContext.request.contextPath}/user/info/${f.uid}" target="_blank">${f.floorReplyer.username }</a>:
+								            <c:out value="${f.content }"></c:out>
+								            <a onclick="floorInput('${c.cid }','${f.floorReplyer.username }')">&nbsp;回复&nbsp;</a>
 							            </div>
 							            <br>
 						            </c:if>
@@ -132,6 +134,11 @@
 		}, "json");
 	}
 	/*楼中楼回复框*/
+	function floorInput(num,name){
+  		$('#floor'+num).slideToggle();
+  		$('#text'+num).focus();
+  		$('#text'+num).val("回复 "+name+" : ");
+	}
 	function openFloorInput(num){
   		$('#floor'+num).slideToggle();
   		$('#text'+num).focus();
@@ -143,7 +150,7 @@
 		var url = "${pageContext.request.contextPath}/article/floor/add";
 		var params = {
 			cid : num,
-			aid : ${article.aid },
+			aid : '${article.aid }',
 			uid : '${user.uid}',
 			content : t,
 		};
@@ -158,7 +165,8 @@
 				'</div>'+
 				'<div class="media-body">'+
 				  '<a href="${pageContext.request.contextPath}/user/info/${user.uid}" target="_blank">${user.username }</a>:'+t+
-				'</div>';
+				  '<a onclick="floorInput(\''+num+'\',\'${user.username }\')">&nbsp;回复&nbsp;</a>'+
+				'</div><br>';
 				$('#media'+num).append(t1);
 				$('#text'+num).val('');
 				$('#floor'+num).slideUp();

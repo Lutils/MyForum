@@ -24,7 +24,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 			article.uid = user.uid 
 		order by aid desc limit #{currentPage},#{pageSize}
-		
 	</select>
 	
 	<select id="getArticleByID" resultMap="ArticleResult">
@@ -34,6 +33,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			article.uid = user.uid  
 		and 
 			aid=#{aid}
+	</select>
+	
+	<select id="getArticleListByStatus" resultMap="ArticleResult">
+		select * from article 
+		where status in
+		<foreach  item="item" collection="list" index="index"  open="(" separator="," close=")">#{item}</foreach>
+		order by aid desc
 	</select>
 	
 	<insert id="addArticle">
